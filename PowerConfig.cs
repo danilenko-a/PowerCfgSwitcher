@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PowerCfgSwitcher
 {
-    internal class PowerConfig
+    internal class PowerConfig : IEquatable<PowerConfig>
     {
         public ActiveState IsActive { get; set; }
 
@@ -23,9 +17,24 @@ namespace PowerCfgSwitcher
             IsActive = isActive;
         }
 
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as PowerConfig);
+        }
+
+        public override int GetHashCode()
+        {
+            return Guid.GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"{Name} {IsActive}".Trim();
+        }
+
+        public bool Equals(PowerConfig other)
+        {
+            return this.Guid.Equals(other.Guid);
         }
     }
 }

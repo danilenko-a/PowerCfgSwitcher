@@ -50,12 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveState.cs" />
+    <Compile Include="ContextMenuImpl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extensions.cs" />
-    <Compile Include="PowerCfgController.cs" />
+    <Compile Include="Interfaces\IContextMenu.cs" />
+    <Compile Include="Interfaces\IContextMenuController.cs" />
+    <Compile Include="Interfaces\IMenuItem.cs" />
+    <Compile Include="MenuItemImpl.cs" />
+    <Compile Include="ContextMenuController.cs" />
     <Compile Include="PowerConfig.cs" />
     <Compile Include="PowerSchemeManager.cs" />
     <Compile Include="PowerprofWrapper.cs" />
-    <Compile Include="ProcessExt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotifyIconBehavior.cs" />

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PowerCfgSwitcher
@@ -17,11 +13,7 @@ namespace PowerCfgSwitcher
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-
-            var powerCfgController = new PowerCfgController();
-
+            var powerCfgController = new ContextMenuController();
             trayIcon = new NotifyIconBehavior(powerCfgController);
 
             Application.Run();
