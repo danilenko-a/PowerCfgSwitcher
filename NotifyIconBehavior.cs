@@ -23,15 +23,8 @@ namespace PowerCfgSwitcher
 
             powerCfgController.CongifMenu(contextMenu);
 
-            //contextMenuImpl.MenuItems.Cast<MenuItem>().ToList()
-            //    .ForEach(x =>
-            //    {
-            //        x.Click += MenuItem_Click;
-            //    });
-
             contextMenu.AddClickHandler(MenuItem_Click);
 
-            //contextMenuImpl.MenuItems.Add("Выход").Click += ExitItem_Click;
             contextMenu.AddMenuItem("Выход", ExitItem_Click);
 
             contextMenu.Popup += MenuStrip_Popup;
