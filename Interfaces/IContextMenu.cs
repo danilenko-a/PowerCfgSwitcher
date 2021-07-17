@@ -7,6 +7,12 @@ namespace PowerCfgSwitcher.Interfaces
     {
         IMenuItem AddMenuItem(string name, Guid guid, Action callback, bool @checked);
 
+        IMenuItem AddMenuItem(string name, EventHandler click);
+
+        void AddClickHandler(EventHandler click);
+
         IEnumerable<IMenuItem> GetMenuItems();
+
+        event EventHandler Popup;
     }
 }

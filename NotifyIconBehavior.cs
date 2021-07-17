@@ -9,35 +9,45 @@ namespace PowerCfgSwitcher
     {
         private readonly IContextMenuController powerCfgController;
 
-        private readonly NotifyIcon notifyIcon = new NotifyIcon();
+        private readonly INotifyIcon notifyIcon;
 
-        private readonly ContextMenuImpl contextMenuImpl = new ContextMenuImpl();
+        private readonly IContextMenu contextMenu;
 
-        public NotifyIconBehavior(IContextMenuController powerCfgController)
+        public NotifyIconBehavior(IContextMenuController powerCfgController, INotifyIcon notifyIcon, IContextMenu contextMenu)
         {
             this.powerCfgController = powerCfgController;
+            this.notifyIcon = notifyIcon;
+            this.contextMenu = contextMenu;
 
-            this.notifyIcon.Icon = Properties.Resources.battery_4246;
-            this.notifyIcon.Text = "Переключатель конфигураций";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.ContextMenu = contextMenuImpl;
+            ConfigureNotifyIcon(notifyIcon, contextMenu);
 
-            powerCfgController.CongifMenu(contextMenuImpl);
+            powerCfgController.CongifMenu(contextMenu);
 
-            contextMenuImpl.MenuItems.Cast<MenuItem>().ToList()
-                .ForEach(x =>
-                {
-                    x.Click += MenuItem_Click;
-                });
+            //contextMenuImpl.MenuItems.Cast<MenuItem>().ToList()
+            //    .ForEach(x =>
+            //    {
+            //        x.Click += MenuItem_Click;
+            //    });
 
-            contextMenuImpl.MenuItems.Add("Выход").Click += ExitItem_Click;
+            contextMenu.AddClickHandler(MenuItem_Click);
 
-            contextMenuImpl.Popup += MenuStrip_Popup;
+            //contextMenuImpl.MenuItems.Add("Выход").Click += ExitItem_Click;
+            contextMenu.AddMenuItem("Выход", ExitItem_Click);
+
+            contextMenu.Popup += MenuStrip_Popup;
+        }
+
+        private void ConfigureNotifyIcon(INotifyIcon notifyIcon, IContextMenu contextMenu)
+        {
+            notifyIcon.Icon = Properties.Resources.battery_4246;
+            notifyIcon.Text = "Переключатель конфигураций";
+            notifyIcon.Visible = true;
+            notifyIcon.ContextMenu = contextMenu;
         }
 
         private void MenuStrip_Popup(object sender, EventArgs e)
         {
-            powerCfgController.UpdateMenu(contextMenuImpl);
+            powerCfgController.UpdateMenu(contextMenu);
         }
 
         private void ExitItem_Click(object sender, EventArgs e)

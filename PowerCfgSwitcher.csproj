@@ -54,12 +54,16 @@
     <Compile Include="ContextMenuImpl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DI\DiContainer.cs" />
+    <Compile Include="DI\IDiContainer.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Interfaces\IContextMenu.cs" />
     <Compile Include="Interfaces\IContextMenuController.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
+    <Compile Include="Interfaces\INotifyIcon.cs" />
     <Compile Include="MenuItemImpl.cs" />
     <Compile Include="ContextMenuController.cs" />
+    <Compile Include="NotifyIconImpl.cs" />
     <Compile Include="PowerConfig.cs" />
     <Compile Include="PowerSchemeManager.cs" />
     <Compile Include="PowerprofWrapper.cs" />

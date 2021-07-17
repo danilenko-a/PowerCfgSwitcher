@@ -20,6 +20,19 @@ namespace PowerCfgSwitcher
             return new MenuItemImpl(menuItem);
         }
 
+        public IMenuItem AddMenuItem(string name, EventHandler click)
+        {
+            var menuItem = this.MenuItems.Add(name);
+            menuItem.Click += click;
+
+            return new MenuItemImpl(menuItem);
+        }
+
+        public void AddClickHandler(EventHandler click)
+        {
+            this.MenuItems.ForEach<MenuItem>(menuItem => menuItem.Click += click);
+        }
+
         public IEnumerable<IMenuItem> GetMenuItems()
         {
             return this.MenuItems.Cast<MenuItem>()
